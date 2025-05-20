@@ -1,31 +1,36 @@
-import { Grid } from '@mui/material';
-import SidebarLeft from './components/SidebarLeft';
+import { Grid, ThemeProvider, Container } from '@mui/material';
+import CategorySidebar from './components/CategorySidebar';
 import PostList from './components/PostList';
-import SidebarRight from './components/SidebarRight';
+import GuideSidebar from './components/GuideSidebar';
 import Header from './components/Header';
+import { theme } from './theme/theme';
 import './App.css';
 
 function App() {
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <Header />
-      <Grid
-        container
-        spacing={3}
-        alignItems="flex-start"
-        sx={{ background: '#f7f9fb', minHeight: '100vh', py: 0, px: 4,}}
-      >
-        <Grid item xs={12} md={3}>
-          <SidebarLeft />
+      <Container maxWidth="xl" sx={{ py: 4 }}>
+        <Grid
+          container
+          spacing={4}
+          sx={{
+            minHeight: 'calc(100vh - 64px)',
+            alignItems: 'flex-start',
+          }}
+        >
+          <Grid item xs={12} md={3}>
+            <CategorySidebar />
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <PostList />
+          </Grid>
+          <Grid item xs={12} md={3}>
+            <GuideSidebar />
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={6}>
-          <PostList />
-        </Grid>
-        <Grid item xs={12} md={3}>
-          <SidebarRight />
-        </Grid>
-      </Grid>
-    </>
+      </Container>
+    </ThemeProvider>
   );
 }
 
